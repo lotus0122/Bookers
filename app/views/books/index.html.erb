@@ -1,41 +1,53 @@
+<% if flash[:notice] %>
+  <p class="flash_color"><%= flash[:notice] %></p>
+<% end %>
 
 <head>
 <title>books</title>
 </head>
 
 <header>
-<h1>Books</h1>
+<h2>Books</h2>
 </header>
 
 <main>
 
 <table>
-<% @book.each do |book| %>
+<thead>
+<tr>
+<th class="table_title">Title</th>
+<th class="table_body">Body</th>
+</tr>
+</thead>
+<tbody>
+<% @books.each do |book| %>
+<tr>
+<td><%= book.title %></td>
+<td><%= book.body %></td>
 
-<%=link_to post.title, post_path(post.id) %>
-
-<%= link_to "show" , show_post_path(post) %>
-<%= link_to "edit" , edit_post_path(post.id) %>
-<%= link_to "Destroy", post_path(post), method: :delete %>
+<td><%=link_to "show" , book_path(book) %></td>
+<td><%=link_to  "edit" , edit_book_path(book) %></td>
+<td><%=link_to "destroy" , book_path(book) , method: :'delete' %></td>
+</tr>
 <% end %>
+</tbody>
 </table>
 
 </main>
 
 <footer>
 
-<h1>New book</h1>
+<h3>New book</h3>
 
 <%= form_for(@book) do |f| %>
 
   <h4>Title</h4>
-  <%= f.text_field :title %>
+  <p class="text_form"><%= f.text_field :title %></p>
 
   <h4>Body</h4>
-  <%= f.text_area :body %>
+  <p class="text_form"><%= f.text_area :body %></p>
 
-  <%= f.submit 'Create Book' %>
-
+<ul class="create_form"><%= f.submit 'Create Book' %></ul>
 
 <% end %>
 
